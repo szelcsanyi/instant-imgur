@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# This script takes a partial screenshot from your desktop, uploads to imgur and copies the url to clipboard.
+
+# Author: Gabor Szelcsanyi <szelcsanyi.gabor@gmail.com>
+#
+# License:  Freely distributable and licensed under the MIT license.
+# Copyright (c) 2014
+
+# Hint for getting token:
+# 1st step in browser, allow app: https://api.imgur.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&response_type=pin
+# 2nd get access_token and refresh_token: 
+#  curl -X POST -F "client_id=YOUR_CLIENT_ID" -F "client_secret=YOUR_CLIENT_SECRET" -F "grant_type=pin" -F "pin=YOUR_PIN" https://api.imgur.com/oauth2/token
+
+client_id='YourClientID'
+img_home="$HOME/Pictures/imgur"
+img=$(date '+'$img_home'/%N.png')
+
+if [ ! -d "$img_home" ]; then
+ mkdir -p "$img_home"
+fi
+
+scrot -s -z "$@" $img >/dev/null 2>&1 || exit
+res=$(curl -sH "Authorization: Client-ID $client_id" -F "image=@$img" "https://api.imgur.com/3/upload")
+
+echo $res | grep -qo '"status":200' && link=$(echo $res | sed -e 's/.*"link":"\([^"]*\).*/\1/' -e 's/\\//g') && del_hash=$(echo $res | sed -e 's/.*"deletehash":"\([^"]*\).*/\1/' -e 's/\\//g')
+
+test -n "$link" && (printf $link | xclip; printf "\a") || echo "$res" > "$img.error"
+
+echo -e "img: $link\ndelete hash: $del_hash" > $img.info
+
