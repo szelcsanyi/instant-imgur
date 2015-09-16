@@ -5,7 +5,7 @@ Instant imgur
 This script takes a partial screenshot from your desktop, uploads to imgur and copies the url to clipboard.
 The taken picture remains in $HOME/Pictures/imgur directory.
 
-## Requires
+## Requirements
 - scrot
 - xclip
 - imgur client id
@@ -13,7 +13,7 @@ The taken picture remains in $HOME/Pictures/imgur directory.
 ## Installation
 - Put imgur script into /usr/local/bin
 - chmod +x /usr/local/bin/imgur
-- Create a key binding for this command
+- Create a key binding for this command (Ubuntu: system settings / keyboard / shortcuts)
 
 ## Contributing
 
@@ -25,8 +25,8 @@ The taken picture remains in $HOME/Pictures/imgur directory.
 
 ## License
 
-* Freely distributable and licensed under the [MIT license](http://szelcsanyi.mit-license.org/2014/license.html).
-* Copyright (c) 2014 Gabor Szelcsanyi
+* Freely distributable and licensed under the [MIT license](http://szelcsanyi.mit-license.org/2015/license.html).
+* Copyright (c) 2015 Gabor Szelcsanyi
 
 [![image](https://ga-beacon.appspot.com/UA-56493884-1/instant-imgur/README.md)](https://github.com/szelcsanyi/instant-imgur)
 
