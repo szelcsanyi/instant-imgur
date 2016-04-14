@@ -5,7 +5,7 @@
 # Author: Gabor Szelcsanyi <szelcsanyi.gabor@gmail.com>
 #
 # License:  Freely distributable and licensed under the MIT license.
-# Copyright (c) 2014
+# Copyright (c) 2016
 
 # Hint for getting token:
 # 1st step in browser, allow app: https://api.imgur.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&response_type=pin
@@ -29,3 +29,4 @@ test -n "$link" && (printf $link | xclip; printf "\a") || echo "$res" > "$img.er
 
 echo -e "img: $link\ndelete hash: $del_hash" > $img.info
 
+notify-send -u low -c "transfer.complete" -t 500 "Image: $link"
